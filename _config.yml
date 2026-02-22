@@ -3,3 +3,10 @@ plugins:
 - jekyll-remote-theme
 title: Preconditioning Optimal Transport with Applications on video
 description: [A short description of your site's purpose]
+github:
+    repository_nwo: https://github.com/owen-m1ller/ot-preconditioning
+github_users:
+    - csz23
+    - galnnt
+    - JennyChengxiXu
+    - owen-m1ller
