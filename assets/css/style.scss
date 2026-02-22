@@ -1,0 +1,21 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.github-user-list,
+.gallery-links {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.github-user-list li,
+.gallery-links li {
+  margin-bottom: 8px;
+}
+
+.gallery-links a {
+  font-weight: bold;
+  color: #0366d6;
+}
