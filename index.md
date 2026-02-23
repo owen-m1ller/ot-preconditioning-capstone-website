@@ -28,7 +28,7 @@ There are two valuable objects relating to optimal transport
 
 ### Moving Boulders to Rocks
 
-Now, suppose that my boulders are not of equal size. Additionally, suppose I want the stick figure to have more detail. I can split my boulders into smaller rocks and move those rocks into the desired locations for the stick figure. Now, solving the optimal transport problem involves
+Now, suppose that my boulders are not of equal size. Additionally, suppose I want the stick figure to have more detail. I can split my boulders into smaller rocks and move those rocks into the locations desired to draw the stick figure. Now, solving the optimal transport problem involves
 1. Choosing which boulders to split.
 2. Choosing how to split each boulder. For example, I could split a boulder in half and then split one of those halves into 9 equal sized pieces.
 3. Choosing where to move each boulder and rock to create the stick figure.
@@ -37,10 +37,68 @@ Now, suppose that my boulders are not of equal size. Additionally, suppose I wan
 
 For a more general setting, imagine that my rocks have weathered into infinitely many pieces of sand in a pile. I want to find a way to reshape my sand pile into a sand castle, minimizing the total distance travelled across each sand particle.
 
-(This is not actually the most general setting for optimal transport. This is the continuous case in one dimension. We can perform optimal transport in higher dimensions, or even between completely different spaces)
+This is not actually the most general setting for optimal transport. This is the continuous case in one or two dimensions. We can perform optimal transport in higher dimensions, or even between completely different spaces
 
 # Our Algorithms
 
 # Our Method: Color Transfer
 
 # Our Method: Video Blend
+
+<div class="frame-slider-container" markdown="0">
+  <figure>
+    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame0001.png' | relative_url }}" alt="Animation Frame">
+    <figcaption>Frame <span id="frame-counter">1</span></figcaption>
+  </figure>
+
+  <input
+    type="range"
+    id="frame-slider"
+    min="0"
+    max="24"
+    value="0"
+    step="1"
+  >
+</div>
+<script>
+  const frames = [
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0002.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0003.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0004.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0005.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0006.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0007.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0008.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0009.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00010.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00011.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00012.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00013.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00014.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00015.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00016.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00017.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00018.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00019.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00020.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00021.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00022.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00023.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00024.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00025.png' | relative_url }}",
+  ];
+
+  const slider = document.getElementById('frame-slider');
+  const displayImage = document.getElementById('sequence-display');
+  const frameCounter = document.getElementById('frame-counter');
+
+  slider.addEventListener('input', function() {
+    const frameIndex = parseInt(slider.value, 10);
+
+    displayImage.src = frames[frameIndex];
+
+    frameCounter.innerText = frameIndex + 1;
+  });
+</script>
+
