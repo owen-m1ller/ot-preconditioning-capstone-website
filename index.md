@@ -7,7 +7,7 @@ Fundamentally, optimal transport is a problem about how to move one shape into a
 ### Moving Boulders to Boulders
 Suppose we have 12 boulders in the shape of a smiley face.  We want to roll these boulders so that they resemble a stick figure instead. The amount of energy I spend in total depends on which location I decide to move each boulder to. 
 
-<div class="gallery-grid">
+<div class="ot-instructions">
   <figure>
     <img src="{{ '/assets/media/ot-instruction/smile.png' | relative_url }}" alt="Boulders arranged as smile">
     <figcaption>Original Boulder Formation</figcaption>

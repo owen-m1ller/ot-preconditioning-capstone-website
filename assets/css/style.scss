@@ -21,7 +21,7 @@
   color: #0366d6;
 }
 
-/* Gallery Grid Layout */
+/* gallery grid layout */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -43,6 +43,33 @@
 }
 
 .gallery-grid figcaption {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* ot-instructions */
+.ot-instructions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+  align-items: end;
+}
+
+.ot-instructions figure {
+  margin: 0;
+  text-align: center;
+}
+
+.ot-instructions img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ot-instructions figcaption {
   margin-top: 8px;
   font-size: 0.9em;
   color: #666;
