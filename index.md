@@ -12,17 +12,14 @@ Suppose we have 12 boulders in the shape of a smiley face.  We want to roll thes
     <img src="{{ '/assets/media/ot-instruction/smile.png' | relative_url }}" alt="Boulders arranged as smile">
     <figcaption>Original Boulder Formation</figcaption>
   </figure>
-
   <figure>
     <img src="{{ '/assets/media/ot-instruction/stick-figure.png' | relative_url }}" alt="Boulders arranged as stick figure">
     <figcaption>Desired Boulder Formation</figcaption>
   </figure>
-
   <figure>
     <img src="{{ '/assets/media/ot-instruction/smile-stick-matching.png' | relative_url }}" alt="Matching between smile boulders and stick figure boulders">
     <figcaption>A Matching Between Formations</figcaption>
   </figure>
-
 </div>
 
 There are two valuable objects relating to optimal transport
