@@ -45,6 +45,14 @@ This is not actually the most general setting for optimal transport. This is the
 
 # Our Method: Video Blend
 
+There is a commonly known method for using optimal transport to blend between two images. Our goal was to find a correlary of this method for blending between two videos. The image technique is as follows:
+1. Convert the images you want to blend between to greyscale. The darker a pixel, the more mass it has (value between 0 and 255).
+2. Normalize the images so that both have a total mass of 1
+3. Find an optimal transport plan between the two images where the distance between two pixels is the euclidean distance
+4. Interpolate along that plan to blend between the two images.
+
+Below is a visualization for image blending:
+
 <div class="image-references">
   <figure>
     <img id="start-frame" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Walking Image">
@@ -112,4 +120,3 @@ This is not actually the most general setting for optimal transport. This is the
     frameCounter.innerText = frameIndex + 1;
   });
 </script>
-
