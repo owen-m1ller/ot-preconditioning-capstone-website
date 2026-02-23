@@ -128,13 +128,6 @@ Now let's say you want to blend two videos, starting the transition at fram 30 a
 
 Our hope was that the space of maps would in a sense be continuous. We want a small change to the pairs of images (where the change is obtained by moving to the next frame) corresponds to a small change in a map between those pairs of images. If this were true, we would expect interpolating across different maps sequentially to achieve a smooth result. This appears to be the case:
 
-<div class="gallery-grid">
-  <video width="100%" controls>
-    <source src="{{ '/assets/media/video-blend/walking-to-jogging.mp4' | relative_url }}" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
-
 <div class="video-sync-container" markdown="0">
   
   <div class="ot-instructions"> 
