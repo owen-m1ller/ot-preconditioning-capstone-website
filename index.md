@@ -120,3 +120,65 @@ Below is a visualization for image blending:
     frameCounter.innerText = frameIndex + 1;
   });
 </script>
+
+Now let's say you want to blend two videos, starting the transition at fram 30 and ending the transition at frame 50. Our technique is as follows
+1. For each corresponding frame (e.g. frame 30 of the walking video and frame 30 of the jogging video), find an optimal transport map between the two images
+2. Replace frame 30 with a new image created by interpolating 1/20 of the way through the frame 30 map. Replace frame 31 with a new image created by interpolating 2/20 of the way through the frame 31 map. Continue interpolating by i/20 of the way through the optimal transport map corresponding to frame i.
+3. Create a video by stitching together the first 29 frames of video 1, the 20 frames created by the process of step two, and the remaining frames from video 2
+
+Our hope was that the space of maps would in a sense be continuous. We want a small change to the pairs of images (where the change is obtained by moving to the next frame) corresponds to a small change in a map between those pairs of images. If this were true, we would expect interpolating across different maps sequentially to achieve a smooth result. This appears to be the case:
+
+<div class="gallery-grid">
+  <video width="100%" controls>
+    <source src="{{ '/assets/media/video-blend/walking-to-jogging.mp4' | relative_url }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="video-sync-container" markdown="0">
+  
+  <div class="ot-instructions"> 
+    <figure>
+      <video id="vid-walk" src="{{ '/assets/media/video-blend/walking.mp4' | relative_url }}" muted playsinline></video>
+      <figcaption>Walking</figcaption>
+    </figure>
+    
+    <figure>
+      <video id="vid-blend" src="{{ '/assets/media/video-blend/walking-to-jogging.mp4' | relative_url }}" muted playsinline></video>
+      <figcaption>Optimal Transport Blend</figcaption>
+    </figure>
+    
+    <figure>
+      <video id="vid-jog" src="{{ '/assets/media/video-blend/jogging.mp4' | relative_url }}" muted playsinline></video>
+      <figcaption>Jogging</figcaption>
+    </figure>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="master-play-btn" style="padding: 10px 20px; cursor: pointer;">Play Sequence</button>
+  </div>
+
+</div>
+
+<script>
+  const playBtn = document.getElementById('master-play-btn');
+  const vidWalk = document.getElementById('vid-walk');
+  const vidBlend = document.getElementById('vid-blend');
+  const vidJog = document.getElementById('vid-jog');
+
+  playBtn.addEventListener('click', function() {
+
+    if (vidWalk.paused) {
+      vidWalk.play();
+      vidBlend.play();
+      vidJog.play();
+      playBtn.innerText = "Pause Sequence";
+    }
+    else {
+      vidWalk.pause();
+      vidBlend.pause();
+      vidJog.pause();
+      playBtn.innerText = "Play Sequence";
+    }
+  });
+</script>
