@@ -9,17 +9,17 @@ Suppose we have 12 boulders in the shape of a smiley face.  We want to roll thes
 
 <div class="ot-instruction">
   <figure>
-    <img src="{{ '/assets/media/ot-instruction/smile.png' | relative_url }}" alt="Original Formation">
+    <img src="{{ '/assets/media/ot-instruction/smile.png' | relative_url }}" alt="Boulders arranged as smile">
     <figcaption>Source</figcaption>
   </figure>
 
   <figure>
-    <img src="{{ '/assets/media/ot-instruction/stick-figure.png' | relative_url }}" alt="Original Formation">
+    <img src="{{ '/assets/media/ot-instruction/stick-figure.png' | relative_url }}" alt="Boulders arranged as stick figure">
     <figcaption>Source</figcaption>
   </figure>
 
   <figure>
-    <img src="{{ '/assets/media/ot-instruction/smile-stick-matching.png' | relative_url }}" alt="Original Formation">
+    <img src="{{ '/assets/media/ot-instruction/smile-stick-matching.png' | relative_url }}" alt="Matching between smile boulders and stick figure boulders">
     <figcaption>Source</figcaption>
   </figure>
 
