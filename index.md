@@ -47,7 +47,7 @@ This is not actually the most general setting for optimal transport. This is the
 
 <div class="frame-slider-container" markdown="0">
   <figure>
-    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame0001.png' | relative_url }}" alt="Animation Frame">
+    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Animation Frame">
     <figcaption>Frame <span id="frame-counter">1</span></figcaption>
   </figure>
 
@@ -71,22 +71,22 @@ This is not actually the most general setting for optimal transport. This is the
     "{{ '/assets/media/video-blend/displacement-interpolation/frame_0007.png' | relative_url }}",
     "{{ '/assets/media/video-blend/displacement-interpolation/frame_0008.png' | relative_url }}",
     "{{ '/assets/media/video-blend/displacement-interpolation/frame_0009.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00010.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00011.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00012.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00013.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00014.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00015.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00016.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00017.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00018.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00019.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00020.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00021.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00022.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00023.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00024.png' | relative_url }}",
-    "{{ '/assets/media/video-blend/displacement-interpolation/frame_00025.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0010.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0011.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0012.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0013.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0014.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0015.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0016.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0017.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0018.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0019.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0020.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0021.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0022.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0023.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0024.png' | relative_url }}",
+    "{{ '/assets/media/video-blend/displacement-interpolation/frame_0025.png' | relative_url }}",
   ];
 
   const slider = document.getElementById('frame-slider');

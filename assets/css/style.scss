@@ -74,3 +74,16 @@
   font-size: 0.9em;
   color: #666;
 }
+
+/* frame sequence slider */
+.frame-slider-container {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+
+#frame-slider {
+  width: 100%;
+  margin-top: 15px;
+  cursor: ew-resize;
+}
