@@ -87,3 +87,43 @@
   margin-top: 15px;
   cursor: ew-resize;
 }
+
+/* image-references */
+.image-references {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+  align-items: end;
+}
+
+.image-references figure {
+  margin: 0;
+  text-align: center;
+}
+
+.image-references img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-references figcaption {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* frame sequence slider */
+.frame-slider-container {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+
+#frame-slider {
+  width: 100%;
+  margin-top: 15px;
+  cursor: ew-resize;
+}

@@ -45,14 +45,14 @@ This is not actually the most general setting for optimal transport. This is the
 
 # Our Method: Video Blend
 
-<div class="ot-instructions">
+<div class="image-references">
   <figure>
-    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Animation Frame">
-    <figcaption>Walking Frame<span id="frame-counter">1</span></figcaption>
+    <img id="start-frame" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Walking Image">
+    <figcaption>Walking Image</figcaption>
   </figure>
   <figure>
-    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0025.png' | relative_url }}" alt="Animation Frame">
-    <figcaption>Jogging Frame<span id="frame-counter">1</span></figcaption>
+    <img id="end-frame" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0029.png' | relative_url }}" alt="Jogging Image">
+    <figcaption>Jogging Image</figcaption>
   </figure>
 </div>
 
