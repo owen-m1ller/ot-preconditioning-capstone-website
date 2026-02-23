@@ -45,6 +45,17 @@ This is not actually the most general setting for optimal transport. This is the
 
 # Our Method: Video Blend
 
+<div class="ot-instructions">
+  <figure>
+    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Animation Frame">
+    <figcaption>Walking Frame<span id="frame-counter">1</span></figcaption>
+  </figure>
+  <figure>
+    <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0025.png' | relative_url }}" alt="Animation Frame">
+    <figcaption>Jogging Frame<span id="frame-counter">1</span></figcaption>
+  </figure>
+</div>
+
 <div class="frame-slider-container" markdown="0">
   <figure>
     <img id="sequence-display" src="{{ '/assets/media/video-blend/displacement-interpolation/frame_0001.png' | relative_url }}" alt="Animation Frame">
