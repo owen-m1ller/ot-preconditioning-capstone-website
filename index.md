@@ -111,7 +111,7 @@ We accelerated the process of recoloring videos rather than images. Rather than 
 
   <div class="ot-instructions">
     <figure>
-      <img src="{{ '/assets/media/color-transfer/forest.jpg' | relative_url }}" alt="Color Reference Palette">
+      <img src="{{ '/assets/media/color-transfer/mountains.png' | relative_url }}" alt="Color Reference Palette">
       <figcaption>Color Reference</figcaption>
     </figure>
 
@@ -121,7 +121,7 @@ We accelerated the process of recoloring videos rather than images. Rather than 
     </figure>
 
     <figure>
-      <video id="vid-recolored" src="{{ '/assets/media/color-transfer/green-wf.mp4' | relative_url }}" muted playsinline></video>
+      <video id="vid-recolored" src="{{ '/assets/media/color-transfer/brown-wf.mp4' | relative_url }}" muted playsinline></video>
       <figcaption>Recolored Result</figcaption>
     </figure>
   </div>
