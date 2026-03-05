@@ -39,7 +39,7 @@ For a more general setting, imagine that my rocks have weathered into infinitely
 
 This is not actually the most general setting for optimal transport. This is the continuous case in one or two dimensions. We can perform optimal transport in higher dimensions, or even between completely different spaces
 
-# Our Method: Color Transfer
+# Color Transfer
 
 <div class="ot-instructions"> 
     <figure>
@@ -53,8 +53,8 @@ This is not actually the most general setting for optimal transport. This is the
     </figure>
 
     <figure>
-      <img src="{{ '/assets/media/color-transfer/penacony__to__sunset__precond_plain_sinkhorn_knn.png' | relative_url }}" alt="Content Image">
-      <figcaption>Content Image</figcaption>
+      <img src="{{ '/assets/media/color-transfer/penacony__to__sunset__precond_plain_sinkhorn_knn.png' | relative_url }}" alt="Resulting Image">
+      <figcaption>Resulting Image</figcaption>
     </figure>
 </div>
 
@@ -76,10 +76,23 @@ A preconditioner is a preprocessing routine that makes a problem easier or faste
 1. Find the sample mean and covariance for each point cloud
 2. Rotate and stretch the clouds so that they have the same covariance
 3. Move the second point cloud so that its sample mean aligns with the sample mean of the first point cloud
+After running this preconditioning routine, we can run the optimal transport solver as normal and then transform each point cloud back to its original position. The optimal map obtained through from this procedure is guaranteed to be the same map as the one we would obtain without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
+
+<div class="gallery-grid">
+  <figure>
+    <img src="{{ '/assets/media/color-transfer/precond-visual.png' | relative_url }}" alt="Preconditioning Routine">
+    <figcaption>Preconditioning Routine</figcaption>
+  </figure>
+</div>
+
+Additionally, our results show that this preconditioning procedure improves
+the condition number of the Gibbs matrix generated from the transport cost matrix when using the Sinkhorn algorithm to find an optimal transport map. This has two benefits
+1. We can solve for an optimal transport map faster (the Sinkhorn algorithm requires fewer iterations)
+2. We can lower the regularization used by the Sinkhorn solver, leading to a more exact solution
 
 ### LAD Space Embedding
 
-# Our Method: Video Blend
+# Video Blend
 
 There is a commonly known method for using optimal transport to blend between two images. Our goal was to find a correlary of this method for blending between two videos. The image technique is as follows:
 1. Convert the images you want to blend between to greyscale. The darker a pixel, the more mass it has (value between 0 and 255).
@@ -157,7 +170,7 @@ Below is a visualization for image blending:
   });
 </script>
 
-Now let's say you want to blend two videos, starting the transition at fram 30 and ending the transition at frame 50. Our technique is as follows
+We developed a technique to blend two videos, starting the transition at frame 30 and ending the transition at frame 50. Our technique is as follows
 1. For each corresponding frame (e.g. frame 30 of the walking video and frame 30 of the jogging video), find an optimal transport map between the two images
 2. Replace frame 30 with a new image created by interpolating 1/20 of the way through the frame 30 map. Replace frame 31 with a new image created by interpolating 2/20 of the way through the frame 31 map. Continue interpolating by i/20 of the way through the optimal transport map corresponding to frame i.
 3. Create a video by stitching together the first 29 frames of video 1, the 20 frames created by the process of step two, and the remaining frames from video 2
