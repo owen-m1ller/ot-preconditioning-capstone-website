@@ -39,9 +39,28 @@ For a more general setting, imagine that my rocks have weathered into infinitely
 
 This is not actually the most general setting for optimal transport. This is the continuous case in one or two dimensions. We can perform optimal transport in higher dimensions, or even between completely different spaces
 
-# Our Algorithms
-
 # Our Method: Color Transfer
+
+## An Overview of Color Transfer
+
+Given two images, color transfer is the task of recoloring of the second image in the color scheme of the first. Optimal transport is an effective solution and can solve the problem with the following simplified steps:
+1. Embed each pixel of image one into RGB color space, the space with three axes representing the red component of the component (0-255), the green component of the pixel (0-255, and the blue component of the pixel (0-255).
+2. Embed each pixel of image two into RGB space.
+3. Find an optimal transport plan between the point cloud of image one and the point cloud of image two in RGB space
+4. Change the color of each pixel in image two to the color of the pixel from image one that it was paired with in the optimal transport plan
+
+## Improving Color Transfer
+
+Our project explored ways to improve both the quality and speed of color transfer solvers, primarily through the method of preconditioning.
+
+### Preconditioning
+
+A preconditioner is a preprocessing routine that makes a problem easier or faster to solve. Given two point clouds in color space (one for each image), our preprocessing routine is as follows:
+1. Find the sample mean and covariance for each point cloud
+2. Rotate and stretch the clouds so that they have the same covariance
+3. Move the second point cloud so that its sample mean aligns with the sample mean of the first point cloud
+
+### LAD Space Embedding
 
 # Our Method: Video Blend
 
