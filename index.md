@@ -129,9 +129,7 @@ We accelerated the process of recoloring videos rather than images. Rather than 
   <div style="text-align: center; margin-top: 20px;">
     <button id="color-play-btn" style="padding: 10px 20px; cursor: pointer;">Play Comparison</button>
   </div>
-
 </div>
-
 <script>
   const colorPlayBtn = document.getElementById('color-play-btn');
   const vidTarget = document.getElementById('vid-target'); 
@@ -165,6 +163,7 @@ We accelerated the process of recoloring videos rather than images. Rather than 
   });
 </script>
 
+<br>
 # Video Blend
 
 There is a commonly known method for using optimal transport to blend between two images. Our goal was to find a correlary of this method for blending between two videos. The image technique is as follows:
@@ -288,9 +287,25 @@ Our hope was that the space of maps would in a sense be continuous. We want a sm
   const vidBlend = document.getElementById('vid-blend');
   const vidJog = document.getElementById('vid-jog');
 
+  const offsetTime = 0.2;
+
+  vidWalk.currentTime = offsetTime;
+  vidBlend.currentTime = offsetTime;
+  vidJog.currentTime = offsetTime;
+
   playBtn.addEventListener('click', function() {
 
-    if (vidWalk.paused) {
+    if (vidBlend.ended) {
+      vidWalk.currentTime = offsetTime;
+      vidBlend.currentTime = offsetTime;
+      vidJog.currentTime = offsetTime;
+
+      vidWalk.play();
+      vidBlend.play();
+      vidJog.play();
+      playBtn.innerText = "Pause Sequence";
+    }
+    else if (vidBlend.paused) {
       vidWalk.play();
       vidBlend.play();
       vidJog.play();
@@ -302,5 +317,11 @@ Our hope was that the space of maps would in a sense be continuous. We want a sm
       vidJog.pause();
       playBtn.innerText = "Play Sequence";
     }
+  });
+
+  vidBlend.addEventListener('ended', function() {
+    vidWalk.pause();
+    vidJog.pause();
+    playBtn.innerText = "Restart Sequence";
   });
 </script>
