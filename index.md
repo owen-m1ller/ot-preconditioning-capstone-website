@@ -41,6 +41,23 @@ This is not actually the most general setting for optimal transport. This is the
 
 # Our Method: Color Transfer
 
+<div class="ot-instructions"> 
+    <figure>
+      <img src="{{ '/assets/media/color-transfer/sunset.jpg' | relative_url }}" alt="Color Image">
+      <figcaption>Color Image</figcaption>
+    </figure>
+
+    <figure>
+      <img src="{{ '/assets/media/color-transfer/penacony.png' | relative_url }}" alt="Content Image">
+      <figcaption>Content Image</figcaption>
+    </figure>
+
+    <figure>
+      <img src="{{ '/assets/media/color-transfer/penacony__to__sunset__precond_plain_sinkhorn_knn.png' | relative_url }}" alt="Content Image">
+      <figcaption>Content Image</figcaption>
+    </figure>
+</div>
+
 ## An Overview of Color Transfer
 
 Given two images, color transfer is the task of recoloring of the second image in the color scheme of the first. Optimal transport is an effective solution and can solve the problem with the following simplified steps:
