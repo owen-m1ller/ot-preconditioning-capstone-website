@@ -76,7 +76,8 @@ A preconditioner is a preprocessing routine that makes a problem easier or faste
 1. Find the sample mean and covariance for each point cloud
 2. Rotate and stretch the clouds so that they have the same covariance
 3. Move the second point cloud so that its sample mean aligns with the sample mean of the first point cloud
-After running this preconditioning routine, we can run the optimal transport solver as normal and then transform each point cloud back to its original position. The optimal map obtained through from this procedure is guaranteed to be the same map as the one we would obtain without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
+
+After running this preconditioning routine, we can run the optimal transport solver as usual and then transform each point cloud back to its original position. The optimal map obtained through from this procedure is guaranteed to be as optimal as the map obtained without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
 
 <div class="gallery-grid">
   <figure>
@@ -90,7 +91,67 @@ the condition number of the Gibbs matrix generated from the transport cost matri
 1. We can solve for an optimal transport map faster (the Sinkhorn algorithm requires fewer iterations)
 2. We can lower the regularization used by the Sinkhorn solver, leading to a more exact solution
 
-### LAD Space Embedding
+### K-Nearest Neighbors Regressor
+
+For a high-resolution image, it becomes infeasible to store a matrix of color to color distances for each pair of pixels in memory. Luckily, we can obtain a reasonable representation of the color palette of an image by sampling only a few thousand of its colors. The process for extending a color matching of a sample of colors to the entire image is as follows:
+
+1. Sample 2000 pixels from each image
+2. Find an optimal transport plan between the two sample color point clouds
+3. For each pixel in the image we recolor, find the 10 colors that are closest in color to it that were present within the sample
+4. Those 10 nearest colors are associated by the optimal transport map with 10 colors present in the other image. Recolor each pixel to the average of the 10 colors in the other image that it is associated with.
+
+
+### Other techniques and results
+
+We found superior empricial results by embedding the colors into LAB space rather than RGB space. LAB space has three channels. The L channel represents the lightness of the color and the A and B channels encode the color itself.
+
+We accelerated the process of recoloring videos rather than images. Rather than applying the same color transfer problem to each frame, we performed color transfer between the colors of a reference image and a sample of the colors throughout all frames of the videos.
+
+<div class="color-transfer-showcase" markdown="0">
+
+  <div class="ot-instructions">
+    <figure>
+      <img src="{{ '/assets/media/color-transfer/forest.jpg' | relative_url }}" alt="Color Reference Palette">
+      <figcaption>Color Reference</figcaption>
+    </figure>
+
+    <figure>
+      <video id="vid-target" src="{{ '/assets/media/color-transfer/waterfall.mp4' | relative_url }}" muted playsinline></video>
+      <figcaption>Original Video</figcaption>
+    </figure>
+
+    <figure>
+      <video id="vid-recolored" src="{{ '/assets/media/color-transfer/green-wf.mp4' | relative_url }}" muted playsinline></video>
+      <figcaption>Recolored Result</figcaption>
+    </figure>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="color-play-btn" style="padding: 10px 20px; cursor: pointer;">Play Comparison</button>
+  </div>
+
+</div>
+
+<script>
+  const colorPlayBtn = document.getElementById('color-play-btn');
+  const vidTarget = document.getElementById('vid-target');
+  const vidRecolored = document.getElementById('vid-recolored');
+
+  colorPlayBtn.addEventListener('click', function() {
+
+    if (vidTarget.paused) {
+      vidTarget.play();
+      vidRecolored.play();
+      colorPlayBtn.innerText = "Pause Comparison";
+    }
+    else {
+      vidTarget.pause();
+      vidRecolored.pause();
+      colorPlayBtn.innerText = "Play Comparison";
+    }
+  });
+</script>
+
 
 # Video Blend
 
@@ -174,6 +235,13 @@ We developed a technique to blend two videos, starting the transition at frame 3
 1. For each corresponding frame (e.g. frame 30 of the walking video and frame 30 of the jogging video), find an optimal transport map between the two images
 2. Replace frame 30 with a new image created by interpolating 1/20 of the way through the frame 30 map. Replace frame 31 with a new image created by interpolating 2/20 of the way through the frame 31 map. Continue interpolating by i/20 of the way through the optimal transport map corresponding to frame i.
 3. Create a video by stitching together the first 29 frames of video 1, the 20 frames created by the process of step two, and the remaining frames from video 2
+
+<div class="gallery-grid">
+  <figure>
+    <img src="{{ '/assets/media/video-blend/videoblend-diagram.jpg' | relative_url }}" alt="Preconditioning Routine">
+    <figcaption>Preconditioning Routine</figcaption>
+  </figure>
+</div>
 
 Our hope was that the space of maps would in a sense be continuous. We want a small change to the pairs of images (where the change is obtained by moving to the next frame) corresponds to a small change in a map between those pairs of images. If this were true, we would expect interpolating across different maps sequentially to achieve a smooth result. This appears to be the case:
 
