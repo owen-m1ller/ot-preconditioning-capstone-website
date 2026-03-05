@@ -328,6 +328,6 @@ Our hope was that the space of maps would in a sense be continuous. We want a sm
   });
 </script>
 
-### Additional techniques
+### Additional Techniques
 
 We used an algorithm based on K-Nearest Neighbors to find the background of the video. For a given pixel, if that pixels values have been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
