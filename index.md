@@ -134,12 +134,20 @@ We accelerated the process of recoloring videos rather than images. Rather than 
 
 <script>
   const colorPlayBtn = document.getElementById('color-play-btn');
-  const vidTarget = document.getElementById('vid-target');
-  const vidRecolored = document.getElementById('vid-recolored');
+  const vidTarget = document.getElementById('vid-target'); 
+  const vidRecolored = document.getElementById('vid-recolored'); 
 
   colorPlayBtn.addEventListener('click', function() {
 
-    if (vidTarget.paused) {
+    if (vidRecolored.ended) {
+      vidTarget.currentTime = 0;
+      vidRecolored.currentTime = 0;
+
+      vidTarget.play();
+      vidRecolored.play();
+      colorPlayBtn.innerText = "Pause Comparison";
+    }
+    else if (vidRecolored.paused) {
       vidTarget.play();
       vidRecolored.play();
       colorPlayBtn.innerText = "Pause Comparison";
@@ -150,8 +158,12 @@ We accelerated the process of recoloring videos rather than images. Rather than 
       colorPlayBtn.innerText = "Play Comparison";
     }
   });
-</script>
 
+  vidRecolored.addEventListener('ended', function() {
+    vidTarget.pause(); 
+    colorPlayBtn.innerText = "Restart Comparison"; 
+  });
+</script>
 
 # Video Blend
 
