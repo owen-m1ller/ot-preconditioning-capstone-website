@@ -1,4 +1,6 @@
-# Results
+# Project Summary
+
+Optimal transport is a natural distance measure between distributions with applications to geometric problems, including image and video processing. We explore how optimal transport preconditioners can improve color transfer fidelity and reduce the number of required iterations of the Sinkhorn algorithm. Additionally, we demonstrate a proof-of-concept for extending optimal transport displacement interpolation to a video blending technique.
 
 # Optimal Transport
 
@@ -325,3 +327,7 @@ Our hope was that the space of maps would in a sense be continuous. We want a sm
     playBtn.innerText = "Restart Sequence";
   });
 </script>
+
+### Additional techniques
+
+We used an algorithm based on K-Nearest Neighbors to find the background of the video. For a given pixel, if that pixels values have been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
