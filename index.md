@@ -116,12 +116,12 @@ We accelerated the process of recoloring videos rather than images. Rather than 
     </figure>
 
     <figure>
-      <video id="vid-target" src="{{ '/assets/media/color-transfer/waterfall.mp4#t=0,12' | relative_url }}" muted playsinline></video>
+      <video id="vid-target" src="{{ '/assets/media/color-transfer/waterfall.mp4' | relative_url }}" muted playsinline></video>
       <figcaption>Original Video</figcaption>
     </figure>
 
     <figure>
-      <video id="vid-recolored" src="{{ '/assets/media/color-transfer/brown-wf.mp4#t=0,12' | relative_url }}" muted playsinline></video>
+      <video id="vid-recolored" src="{{ '/assets/media/color-transfer/brown-wf.mp4' | relative_url }}" muted playsinline></video>
       <figcaption>Recolored Result</figcaption>
     </figure>
   </div>
@@ -250,8 +250,8 @@ We developed a technique to blend two videos, starting the transition at frame 3
 
 <div class="gallery-grid">
   <figure>
-    <img src="{{ '/assets/media/video-blend/videoblend-diagram.jpg' | relative_url }}" alt="Preconditioning Routine">
-    <figcaption>Preconditioning Routine</figcaption>
+    <img src="{{ '/assets/media/video-blend/videoblend-diagram.jpg' | relative_url }}" alt="Video Blend Routine">
+    <figcaption>Video Blend Routine</figcaption>
   </figure>
 </div>
 
