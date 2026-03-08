@@ -1,6 +1,6 @@
 # Project Summary
 
-Optimal transport is a natural distance metric between distributions with applications to geometric problems, including image and video processing. We explore how optimal transport preconditioners can improve color transfer fidelity and reduce the number of required iterations of the Sinkhorn algorithm. Additionally, we demonstrate a proof-of-concept for extending optimal transport displacement interpolation to a video blending technique.
+Optimal transport is a natural distance metric between distributions with applications to geometric problems, including image and video processing. We explore how optimal transport preconditioners can improve color transfer fidelity and reduce the condition number of the Gibbs kernel. Additionally, we demonstrate a proof-of-concept for extending optimal transport displacement interpolation to a video blending technique.
 
 # Optimal Transport
 
@@ -25,21 +25,21 @@ Suppose we have 12 boulders in the shape of a smiley face.  We want to roll thes
 </div>
 
 There are two valuable objects relating to optimal transport
-1. The optimal matching between boulders in the smiley face and boulders in the stick figure (the plan or map).
-2. The total distance boulders move when I rearrange them according to the optimal matching
+1. The minimal total distance boulders need to move in order to reach the target shape
+2. The one-to-one matching associating a boulder of the smiley face with a boulder of the stick figure. Specifically, we care about the matching that corresponds with the minimal total distance.
 
 ### Moving Boulders to Rocks
 
-Now, suppose that my boulders are not of equal size. Additionally, suppose I want the stick figure to have more detail. I can split my boulders into smaller rocks and move those rocks into the locations desired to draw the stick figure. Now, solving the optimal transport problem involves
+Now, suppose that the boulders are not of equal size. Additionally, suppose we want the stick figure to have more detail. We can split the boulders into smaller rocks and move those rocks into the locations desired to draw the stick figure. Now, solving the optimal transport problem involves
 1. Choosing which boulders to split.
-2. Choosing how to split each boulder. For example, I could split a boulder in half and then split one of those halves into 9 equal sized pieces.
+2. Choosing how to split each boulder. For example, we could split a boulder in half and then split one of those halves into nine equal sized rocks.
 3. Choosing where to move each boulder and rock to create the stick figure.
 
 ### Sand Pile to Sand Castle
 
-For a more general setting, imagine that my rocks have weathered into infinitely many pieces of sand in a pile. I want to find a way to reshape my sand pile into a sand castle, minimizing the total distance travelled across each sand particle.
+For a more general setting, imagine that my rocks have weathered into infinitely many sand particles in a pile. We want to find a way to reshape the sand pile into a sand castle, minimizing the total distance travelled by each sand particle.
 
-This is not actually the most general setting for optimal transport. This is the continuous case in one or two dimensions. We can perform optimal transport in higher dimensions, or even between completely different spaces
+This is not actually the most general setting for optimal transport. This is the continuous case in one or two dimensions. We can perform optimal transport in higher dimensions, or even between completely different spaces.
 
 # Color Transfer
 
@@ -63,7 +63,7 @@ This is not actually the most general setting for optimal transport. This is the
 ## An Overview of Color Transfer
 
 Given two images, color transfer is the task of recoloring of the second image in the color scheme of the first. Optimal transport is an effective solution and can solve the problem with the following simplified steps:
-1. Embed each pixel of image one into RGB color space, the space with three axes representing the red component of the component (0-255), the green component of the pixel (0-255, and the blue component of the pixel (0-255).
+1. Embed each pixel of image one into RGB color space, the space with three axes representing the red component of the component (0-255), the green component of the pixel (0-255), and the blue component of the pixel (0-255).
 2. Embed each pixel of image two into RGB space.
 3. Find an optimal transport plan between the point cloud of image one and the point cloud of image two in RGB space
 4. Change the color of each pixel in image two to the color of the pixel from image one that it was paired with in the optimal transport plan
@@ -77,7 +77,7 @@ Our project explored ways to improve both the quality and speed of color transfe
 A preconditioner is a preprocessing routine that makes a problem easier or faster to solve. Given two point clouds in color space (one for each image), our preprocessing routine is as follows:
 1. Find the sample mean and covariance for each point cloud
 2. Rotate and stretch the clouds so that they have the same covariance
-3. Move the second point cloud so that its sample mean aligns with the sample mean of the first point cloud
+3. Align the clouds so that they have the same sample mean
 
 After running this preconditioning routine, we can run the optimal transport solver as usual and then transform each point cloud back to its original position. The optimal map obtained through from this procedure is guaranteed to be as optimal as the map obtained without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
 
@@ -102,7 +102,7 @@ the condition number of the Gibbs matrix generated from the transport cost matri
 
 ### K-Nearest Neighbors Regressor
 
-For a high-resolution image, it becomes infeasible to store a matrix of color to color distances for each pair of pixels in memory. Luckily, we can obtain a reasonable representation of the color palette of an image by sampling only a few thousand of its colors. The process for extending a color matching of a sample of colors to the entire image is as follows:
+For a high-resolution image, it becomes infeasible to store a matrix of color to color distances for each pair of pixels in memory. Luckily, we can obtain a reasonable representation of the color palette of an image by sampling only a few thousand of its colors. The process for extending a color matching for a sample of colors to the entire image is as follows:
 
 1. Sample 2000 pixels from each image
 2. Find an optimal transport plan between the two sample color point clouds
@@ -253,8 +253,8 @@ Below is a visualization for image blending:
 
 We developed a technique to blend two videos, starting the transition at frame 30 and ending the transition at frame 50. Our technique is as follows
 1. For each corresponding frame (e.g. frame 30 of the walking video and frame 30 of the jogging video), find an optimal transport map between the two images
-2. Replace frame 30 with a new image created by interpolating 1/20 of the way through the frame 30 map. Replace frame 31 with a new image created by interpolating 2/20 of the way through the frame 31 map. Continue interpolating by i/20 of the way through the optimal transport map corresponding to frame i.
-3. Create a video by stitching together the first 29 frames of video 1, the 20 frames created by the process of step two, and the remaining frames from video 2
+2. Replace frame 31 with a new image created by interpolating 1/20 of the way through the frame 31 optimal transport map. Replace frame 32 with a new image created by interpolating 2/20 of the way through the frame 32 optimal transport map. Continue interpolating by i/20 of the way through the optimal transport map corresponding to frame 30 + i until i reaches 20.
+3. Create a video by stitching together the first 30 frames of video 1, the 20 frames created by the process of step two, and the remaining frames from video 2
 
 <div class="gallery-grid">
   <figure>
@@ -338,4 +338,4 @@ Our hope was that there would be smooth transitions between consecutive maps. We
 <br>
 ### Additional Techniques
 
-We used an algorithm based on K-Nearest Neighbors to find the background of the video. For a given pixel, if that pixels values have been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
+We used an algorithm based on K-Nearest Neighbors to find and remove the background of the video. For a given pixel, if that pixels values have been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
