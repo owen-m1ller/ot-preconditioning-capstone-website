@@ -83,7 +83,7 @@ After running this preconditioning routine, we can run the optimal transport sol
 
 <div class="gallery-grid">
   <figure>
-    <img src="{{ '/assets/media/color-transfer/precond-visual.png' | relative_url }}" alt="Preconditioning Routine">
+    <img src="{{ '/assets/media/color-transfer/precond-visual2.png' | relative_url }}" alt="Preconditioning Routine">
     <figcaption>Preconditioning Routine</figcaption>
   </figure>
 </div>
@@ -95,7 +95,7 @@ the condition number of the Gibbs matrix generated from the transport cost matri
 
 <div class="gallery-grid">
   <figure>
-    <img src="{{ '/assets/media/color-transfer/precond-results.jpg | relative_url }}" alt="Preconditioning Results">
+    <img src="{{ '/assets/media/color-transfer/precond-results.jpg' | relative_url }}" alt="Preconditioning Results">
     <figcpation>Sinkhorn results with and without preconditioning</figcaption>
   </figure>
 </div>
