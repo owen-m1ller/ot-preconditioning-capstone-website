@@ -96,7 +96,7 @@ the condition number of the Gibbs matrix generated from the transport cost matri
 <div class="gallery-grid">
   <figure>
     <img src="{{ '/assets/media/color-transfer/precond-results.jpg' | relative_url }}" alt="Preconditioning Results">
-    <figcpation>Sinkhorn results with and without preconditioning</figcaption>
+    <figcaption>Sinkhorn results with and without preconditioning</figcaption>
   </figure>
 </div>
 
