@@ -93,6 +93,13 @@ the condition number of the Gibbs matrix generated from the transport cost matri
 1. We can solve for an optimal transport map faster (the Sinkhorn algorithm requires fewer iterations)
 2. We can lower the regularization used by the Sinkhorn solver, leading to a more exact solution
 
+<div class="gallery-grid">
+  <figure>
+    <img src="{{ '/assets/media/color-transfer/precond-results.jpg | relative_url }}" alt="Preconditioning Results">
+    <figcpation>Sinkhorn results with and without preconditioning</figcaption>
+  </figure>
+</div>
+
 ### K-Nearest Neighbors Regressor
 
 For a high-resolution image, it becomes infeasible to store a matrix of color to color distances for each pair of pixels in memory. Luckily, we can obtain a reasonable representation of the color palette of an image by sampling only a few thousand of its colors. The process for extending a color matching of a sample of colors to the entire image is as follows:
@@ -256,7 +263,7 @@ We developed a technique to blend two videos, starting the transition at frame 3
   </figure>
 </div>
 
-Our hope was that the space of maps would in a sense be continuous. We want a small change to the pairs of images (where the change is obtained by moving to the next frame) corresponds to a small change in a map between those pairs of images. If this were true, we would expect interpolating across different maps sequentially to achieve a smooth result. This appears to be the case:
+Our hope was that there would be smooth transitions between consecutive maps. We want a small change to the pairs of images (where the change is obtained by moving to the next frame) to correspond with a small change in the map between those pairs of images. If this were true, we would expect interpolating across different maps sequentially to achieve a smooth result. This appears to be the case:
 
 <div class="video-sync-container" markdown="0">
   
