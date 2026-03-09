@@ -79,7 +79,7 @@ A preconditioner is a preprocessing routine that makes a problem easier or faste
 2. Rotate and stretch the clouds so that they have the same covariance
 3. Align the clouds so that they have the same sample mean
 
-After running this preconditioning routine, we can run the optimal transport solver as usual and then transform each point cloud back to its original position. The optimal map obtained through from this procedure is guaranteed to be as optimal as the map obtained without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
+After running this preconditioning routine, we can run the optimal transport solver as usual and then transform each point cloud back to its original position. The optimal map obtained from this procedure is guaranteed to be as optimal as the map obtained without the preconditioning step. Below we visualize the preconditioning routine (note that in reality, the two distributions would lie directly on top of each other after they have been transformed).
 
 <div class="gallery-grid">
   <figure>
@@ -112,7 +112,7 @@ For a high-resolution image, it becomes infeasible to store a matrix of color to
 
 ### Other techniques and results
 
-We found superior empricial results by embedding the colors into LAB space rather than RGB space. LAB space has three channels. The L channel represents the lightness of the color and the A and B channels encode the color itself.
+We found superior empirical results by embedding the colors into LAB space rather than RGB space. LAB space has three channels. The L channel represents the lightness of the color and the A and B channels encode the color itself.
 
 We accelerated the process of recoloring videos rather than images. Rather than applying the same color transfer problem to each frame, we performed color transfer between the colors of a reference image and a sample of the colors throughout all frames of the videos.
 
@@ -173,9 +173,15 @@ We accelerated the process of recoloring videos rather than images. Rather than 
 </script>
 
 <br>
+### Limitations
+While preconditioning can speed up the Sinkhorn algorithm, the bottleneck of the color transfer process is actually running K-Nearest Neighbors. While we could have experimented with replacements for K-Nearest Neighbors, this would be unrelated to our main goal of working with optimal transport itself. This means that the main application of our technique is making the color transfer problem more numerically stable. This allows us to reduce the regularization for the Sinkhorn algorithm and produce a more vibrant image.
+
+### Applications
+Color grading of images and videos is a common task for photographers and video editors. Our techniques can help artists achieve less dull results when performing color transfer. An extension of this project would be to create a tool in an open source image or video editing software.
+
 # Video Blend
 
-There is a commonly known method for using optimal transport to blend between two images. Our goal was to find a correlary of this method for blending between two videos. The image technique is as follows:
+There is a commonly known method for using optimal transport to blend between two images. Our goal was to find a corollary of this method for blending between two videos. The image technique is as follows:
 1. Convert the images you want to blend between to greyscale. The darker a pixel, the more mass it has (value between 0 and 255).
 2. Normalize the images so that both have a total mass of 1
 3. Find an optimal transport plan between the two images where the distance between two pixels is the euclidean distance
@@ -338,4 +344,10 @@ Our hope was that there would be smooth transitions between consecutive maps. We
 <br>
 ### Additional Techniques
 
-We used an algorithm based on K-Nearest Neighbors to find and remove the background of the video. For a given pixel, if that pixels values have been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
+We used an algorithm based on K-Nearest Neighbors to find and remove the background of the video. For a given pixel, if that pixel's value has been relatively constant across the last k frames, then the pixel is classified as a background pixel. Once the background is removed, no mass from the background is considered by the optimal transport solver.
+
+### Limitations
+For color transfer, we could solve the problem on a small sample of the pixels and extend that solution to the entire image. There is no analogous shortcut for video blending. This means that without extreme compute resources, video transfer is only feasible for low-resolution, greyscale images. Additionally, the blend is only applicable when the total mass through both videos is constant and equal. This means that video blending in this form can only be applied in very ideal circumstances.
+
+### Applications
+Still, this is a proof of concept for the video blending technique. Perhaps with much more compute power and heavy preprocessing this could be used for video effects in movies. Examples of when this could be used for video effects is stitching two videos together with similar content or transforming one character into another with similar size.
